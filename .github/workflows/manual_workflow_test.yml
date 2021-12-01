@@ -1,0 +1,33 @@
+name: 'build-test'
+on: # rebuild any PRs and main branch changes
+  workflow_dispatch:
+    inputs:
+      token:
+        required: true
+      pull_number:
+        required: true
+        description: 'Number of Pull  Request'
+      merge_method:
+        required: false
+        description: 'Merge method to use. Possible values are merge, squash or rebase. Default is merge.'
+        default: 'merge'
+      commit_title:
+        required: false
+        description: 'Title for the automatic commit message.'
+      commit_message:
+        required: false
+        description: 'Extra detail to append to automatic commit message.'
+jobs:
+  run_workflow: # make sure the action works on a clean machine without building
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
+        with:
+          token: ${{github.event.inputs.token}}
+          owner: kalgurn
+          repo: test_merge_action
+          pull_number: ${{github.event.inputs.pull_number}}
+          merge_method: ${{github.event.inputs.merge_method}}
+          commit_title: ${{github.event.inputs.commit_title}}
+          commit_message: ${{github.event.inputs.commit_message}}
