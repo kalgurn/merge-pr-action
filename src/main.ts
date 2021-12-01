@@ -1,16 +1,26 @@
 import * as core from '@actions/core'
-import {wait} from './wait'
+import {RepoPayload} from './types'
+import {merge} from './merge'
 
 async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_STEP_DEBUG` to true
+    const payload: RepoPayload = {
+      token: core.getInput('token'),
+      owner: core.getInput('owner'),
+      repo: core.getInput('repo'),
+      pull_number: Number(core.getInput('pull_number')),
+      merge_method: core.getInput(
+        'merge_method'
+      ) as RepoPayload['merge_method'],
+      commit_title: core.getInput('commit_title'),
+      commit_message: core.getInput('commit_message')
+    }
+    // debug is only output if you set the secret `ACTIONS_STEP_DEBUG` to true
+    core.debug(
+      `Merging PR #${payload.pull_number} for the ${payload.owner}/${payload.repo}`
+    )
 
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
-
-    core.setOutput('time', new Date().toTimeString())
+    await merge(payload)
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message)
   }

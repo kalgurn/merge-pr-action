@@ -1,11 +1,29 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Pull Request merge action'
+description: 'This action will merge a certain PR in a certain repo'
+author: 'Kostiantyn Kulbachnyi'
 inputs:
-  milliseconds: # change this
+  token:
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    description: 'github authentication token'
+  owner:
+    required: true
+    description: 'Repository owner/organization name'
+  repo:
+    required: true
+    description: 'Repository name'
+  pull_number:
+    required: true
+    description: 'Number of Pull  Request'
+  merge_method:
+    required: false
+    description: 'Merge method to use. Possible values are merge, squash or rebase. Default is merge.'
+    default: 'merge'
+  commit_title:
+    required: false
+    description: 'Title for the automatic commit message.'
+  commit_message:
+    required: false
+    description: 'Extra detail to append to automatic commit message.'
 runs:
   using: 'node12'
   main: 'dist/index.js'
