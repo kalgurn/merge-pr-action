@@ -1,5 +1,5 @@
-import {getOctokit} from '@actions/github'
 import {RepoPayload} from './types'
+import {getOctokit} from '@actions/github'
 export async function merge(payload: RepoPayload): Promise<string> {
   return new Promise(async resolve => {
     const octokit = getOctokit(payload.token)

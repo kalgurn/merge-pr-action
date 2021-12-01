@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
-import {merge} from './merge'
 import {RepoPayload} from './types'
+import {merge} from './merge'
 
 async function run(): Promise<void> {
   try {
