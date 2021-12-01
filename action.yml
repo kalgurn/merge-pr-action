@@ -1,6 +1,9 @@
 name: 'Pull Request merge action'
 description: 'This action will merge a certain PR in a certain repo'
 author: 'Kostiantyn Kulbachnyi'
+branding:
+  icon: 'git-pull-request'  
+  color: 'green'
 inputs:
   token:
     required: true
