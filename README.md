@@ -1,4 +1,5 @@
 [![build-test](https://github.com/kalgurn/merge-action/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kalgurn/merge-action/actions/workflows/test.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=kalgurn_merge-action&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=kalgurn_merge-action)
 
 # Merge PR action
 
