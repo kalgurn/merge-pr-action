@@ -4,7 +4,7 @@ author: 'Kostiantyn Kulbachnyi'
 inputs:
   token:
     required: true
-    description: 'github authentication token'
+    description: 'GitHub authentication token, can be PAT or Application JWT token'
   owner:
     required: true
     description: 'Repository owner/organization name'
