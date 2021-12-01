@@ -2,8 +2,6 @@ name: 'test-action'
 on: # rebuild any PRs and main branch changes
   workflow_dispatch:
     inputs:
-      token:
-        required: true
       pull_number:
         required: true
         description: 'Number of Pull  Request'
@@ -22,9 +20,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Generate token
+        id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY_B64 }}
+
       - uses: ./
         with:
-          token: ${{github.event.inputs.token}}
+          token: ${{ steps.generate_token.outputs.token }}
           owner: kalgurn
           repo: test_merge_action
           pull_number: ${{github.event.inputs.pull_number}}
