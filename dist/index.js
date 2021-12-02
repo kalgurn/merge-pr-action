@@ -81,18 +81,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.merge = void 0;
 const github_1 = __nccwpck_require__(5438);
+const core_1 = __nccwpck_require__(2186);
 function merge(payload) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
             const octokit = (0, github_1.getOctokit)(payload.token);
-            yield octokit.rest.pulls.merge({
-                owner: payload.owner,
-                repo: payload.repo,
-                pull_number: payload.pull_number,
-                merge_method: payload.merge_method,
-                commit_title: payload.commit_title,
-                commit_message: payload.commit_message
-            });
+            try {
+                yield octokit.rest.pulls.merge({
+                    owner: payload.owner,
+                    repo: payload.repo,
+                    pull_number: payload.pull_number,
+                    merge_method: payload.merge_method,
+                    commit_title: payload.commit_title,
+                    commit_message: payload.commit_message
+                });
+            }
+            catch (e) {
+                (0, core_1.setFailed)(`Failed to ${payload.merge_method} the PR #${payload.pull_number} at ${payload.owner}/${payload.repo}\n${e}`);
+                process.exit(1);
+            }
             setTimeout(() => resolve('done!'));
         }));
     });

@@ -4,6 +4,6 @@ export type RepoPayload = {
   repo: string
   pull_number: number
   merge_method?: 'merge' | 'squash' | 'rebase'
-  commit_title?: string 
-  commit_message?: string 
+  commit_title?: string
+  commit_message?: string
 }
