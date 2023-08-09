@@ -19,6 +19,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./
+      - name: failure
+        uses: ./
+        continue-on-error: true
         with:
-          milliseconds: 1000
+          token: token
+          owner: owner
+          repo: repo
+          pull_number: 1
+          merge_method: squash
+          commit_title: title
+          commit_message: message
+          test_mode: false
+
+      - name: success
+        uses: ./ 
+        with:
+          token: token
+          owner: owner
+          repo: repo
+          pull_number: 1
+          merge_method: squash
+          commit_title: title
+          commit_message: message
+          test_mode: true

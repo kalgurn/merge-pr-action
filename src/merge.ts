@@ -1,9 +1,13 @@
 import {RepoPayload} from './types'
 import {getOctokit} from '@actions/github'
-import {setFailed} from '@actions/core'
+import {info, setFailed} from '@actions/core'
 export async function merge(payload: RepoPayload): Promise<string> {
   return new Promise(async resolve => {
     const octokit = getOctokit(payload.token)
+    if (payload.test_mode) {
+      info("Testing mode on, no action will be executed")
+      process.exit()
+    }
     try {
       await octokit.rest.pulls.merge({
         owner: payload.owner,

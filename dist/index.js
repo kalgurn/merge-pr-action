@@ -51,7 +51,8 @@ function run() {
                 pull_number: Number(core.getInput('pull_number')),
                 merge_method: core.getInput('merge_method'),
                 commit_title: core.getInput('commit_title'),
-                commit_message: core.getInput('commit_message')
+                commit_message: core.getInput('commit_message'),
+                test_mode: core.getBooleanInput('test_mode')
             };
             // debug is only output if you set the secret `ACTIONS_STEP_DEBUG` to true
             core.debug(`Merging PR #${payload.pull_number} for the ${payload.owner}/${payload.repo}`);
@@ -90,6 +91,10 @@ function merge(payload) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
             const octokit = (0, github_1.getOctokit)(payload.token);
+            if (payload.test_mode) {
+                (0, core_1.info)("Testing mode on, no action will be executed");
+                process.exit();
+            }
             try {
                 yield octokit.rest.pulls.merge({
                     owner: payload.owner,
