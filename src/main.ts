@@ -14,7 +14,7 @@ async function run(): Promise<void> {
       ) as RepoPayload['merge_method'],
       commit_title: core.getInput('commit_title'),
       commit_message: core.getInput('commit_message'),
-      test_mode: core.getBooleanInput('debug')
+      test_mode: core.getBooleanInput('test_mode')
     }
     // debug is only output if you set the secret `ACTIONS_STEP_DEBUG` to true
     core.debug(
