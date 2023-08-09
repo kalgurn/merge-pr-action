@@ -28,5 +28,5 @@ inputs:
     required: false
     description: 'Extra detail to append to automatic commit message.'
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
