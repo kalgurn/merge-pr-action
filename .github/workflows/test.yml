@@ -30,7 +30,7 @@ jobs:
           merge_method: squash
           commit_title: title
           commit_message: message
-          test_mode: true
+          test_mode: false
 
       - name: success
         uses: ./ 
