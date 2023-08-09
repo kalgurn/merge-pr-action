@@ -92,8 +92,8 @@ function merge(payload) {
         return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
             const octokit = (0, github_1.getOctokit)(payload.token);
             if (payload.test_mode) {
-                console.log("Testing mode on, no action will be executed");
-                setTimeout(() => resolve('done!'));
+                (0, core_1.info)("Testing mode on, no action will be executed");
+                process.exit();
             }
             try {
                 yield octokit.rest.pulls.merge({
