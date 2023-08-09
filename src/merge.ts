@@ -4,6 +4,10 @@ import {setFailed} from '@actions/core'
 export async function merge(payload: RepoPayload): Promise<string> {
   return new Promise(async resolve => {
     const octokit = getOctokit(payload.token)
+    if (payload.test_mode) {
+      console.log("Testing mode on, no action will be executed")
+      setTimeout(() => resolve('done!'))
+    }
     try {
       await octokit.rest.pulls.merge({
         owner: payload.owner,

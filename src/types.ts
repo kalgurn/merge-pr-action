@@ -6,4 +6,5 @@ export type RepoPayload = {
   merge_method?: 'merge' | 'squash' | 'rebase'
   commit_title?: string
   commit_message?: string
+  test_mode?: boolean
 }
