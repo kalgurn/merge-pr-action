@@ -27,6 +27,9 @@ inputs:
   commit_message:
     required: false
     description: 'Extra detail to append to automatic commit message.'
+  test_mode: 
+    required: false
+    description: 'Only exists for the automated test to pass'
 runs:
   using: 'node16'
   main: 'dist/index.js'
