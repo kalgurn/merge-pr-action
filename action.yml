@@ -30,6 +30,7 @@ inputs:
   test_mode: 
     required: false
     description: 'Only exists for the automated test to pass'
+    default: false
 runs:
   using: 'node16'
   main: 'dist/index.js'
