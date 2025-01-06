@@ -19,7 +19,7 @@ jobs:
   run_workflow: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Generate token
         id: generate_token
         uses: tibdex/github-app-token@v1
